@@ -22,8 +22,6 @@
   },
   "homepage": "https://github.com/christophe-asselin/shopify-challenge#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "express": "^4.16.4",
-    "mongoose": "^5.4.5"
+    "express": "^4.16.4"
   }
 }

@@ -1,7 +1,7 @@
 /**
  * name: items.js
  * author: Christophe Asselin
- * last modified: 2019-01-18
+ * last modified: 2019-01-20
  */
 
 // simulated database

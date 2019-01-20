@@ -1,49 +1,44 @@
-Item = require('./itemModel');
+/**
+ * name: itemController.js
+ * author: Christophe Asselin
+ * last modified: 2019-01-20
+ */
+
+// Import simulated database
+items = require('./items');
 
 // Handle get all items
 exports.getAllItems = function (req, res) {
     let data = [];
-    Item.find({ inventory_count: { $gt: 0 }}, function (err, item) {
-        data.push(item);
-    });
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].inventory_count > 0) {
+            data.push(items[i]);
+        }
+    }
     res.json(data);
 };
 
 // Handle get single item
 exports.getItem = function (req, res) {
-    Item.find({ title: req.params.title }, function (err, item) {
-        if (err)
-            res.send({ message: "Unknown Item" });
-        res.json(item);
-    });
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].title === req.params.title) {
+            res.json(items[i]);
+        }
+    }
+    res.json({ message: "Item does not exist" });
 };
 
 // Handle buy item
 exports.buy = function (req, res) {
-    Item.find({ title: req.params.title }, function (err, item) {
-        if (err)
-            res.send(err);
-        if (item.inventory_count > 0) {
-            item.inventory_count--;
-            res.json({ message: "Item bought" });
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].title === req.params.title) {
+            if (items[i].inventory_count > 0) {
+                items[i].inventory_count--;
+                res.json({ message: items[i].title.concat(" bought") });
+            }
+            else
+                res.json({ message: items[i].title.concat(" is out of stock") });
         }
-        res.json({ message: "Item is out of stock" });
-    });
-};
-
-// Handle new item
-exports.new = function (req, res) {
-    var item = new Item();
-    item.title = req.params.title ? req.params.title : item.title;
-    item.price = req.params.price;
-    item.inventory_count = req.params.inventory_count;
-
-    item.save(function (err) {
-        if (err)
-            res.json(err);
-        res.json({
-            message: 'New item added',
-            data: item
-        });
-    });
+    }
+    res.json({ message: "Item does not exist" });
 };
