@@ -1,3 +1,9 @@
+/**
+ * name: itemController.js
+ * author: Christophe Asselin
+ * last modified: 2019-01-20
+ */
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

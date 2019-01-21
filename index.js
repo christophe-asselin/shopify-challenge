@@ -1,5 +1,5 @@
 /**
- * name: app.js
+ * name: index.js
  * author: Christophe Asselin
  * last modified: 2019-01-20
  */
@@ -20,6 +20,7 @@ var db = mongoose.connection;
 
 app.use('/', routes);
 
-var server = app.listen(3000, function () {
+const PORT = process.env.PORT || 8080;
+var server = app.listen(PORT, function () {
     console.log("app running on port", server.address().port);
 });
