@@ -2,9 +2,8 @@
 
 How to setup this project:
 1. Make sure [Node.js](https://nodejs.org/en/) is installed.
-2. Open the mongo shell by typing mongo in a terminal window.
-3. Run the server by running the command `node index.js`.
-4. You should now be able to make requests to the API. You can use a program like [Postman](https://www.getpostman.com/) to easily test http requests.
+2. Run the server by running the command `node index.js`.
+3. You should now be able to make requests to the API. You can use a program like [Postman](https://www.getpostman.com/) to easily test http requests.
 
 Possible requests:
 - Get all items: Send an HTTP GET request to http://localhost:3000/items?available=false
