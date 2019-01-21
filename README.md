@@ -6,7 +6,7 @@ How to setup this project:
 3. You should now be able to make requests to the API. You can use a program like [Postman](https://www.getpostman.com/) to easily test http requests.
 
 Possible requests:
-- Get all items: Send an HTTP GET request to http://localhost:3000/items?available=false
-- Get all available items: Send an HTTP GET request to http://localhost:3000/items?available=true
-- Get a specific item: Send an HTTP GET request to http://localhost:3000/items/item_name example: http://localhost:3000/items/snowboard
-- Buy a product: Send an HTTP PUT request to http://localhost:3000/items/item_name
+- Get all items: Send an HTTP GET request to http://localhost:8080/items?available=false
+- Get all available items: Send an HTTP GET request to http://localhost:8080/items?available=true
+- Get a specific item: Send an HTTP GET request to http://localhost:8080/items/item_name example: http://localhost:8080/items/snowboard
+- Buy a product: Send an HTTP PUT request to http://localhost:8080/items/item_name
