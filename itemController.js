@@ -4,41 +4,47 @@
  * last modified: 2019-01-20
  */
 
-// Import simulated database
-items = require('./items');
+Item = require('./itemModel');
 
 // Handle get all items
 exports.getAllItems = function (req, res) {
-    let data = [];
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].inventory_count > 0) {
-            data.push(items[i]);
-        }
+    if (req.query.available === "true") {
+        Item.find({ inventory_count: { $gt: 0 }}, function(err, items) {
+            if (err)
+                res.send(err);
+            res.json(items);
+        });
     }
-    res.json(data);
+    else {
+        Item.find({}, function(err, items) {
+            if (err)
+                res.send(err);
+            res.send(items);
+        });
+    }
 };
 
 // Handle get single item
 exports.getItem = function (req, res) {
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].title === req.params.title) {
-            res.json(items[i]);
+    Item.find({ title: req.params.title }, function(err, item) {
+        if (err) {
+            res.send(err);
         }
-    }
-    res.json({ message: "Item does not exist" });
+        res.send(item);
+    });
 };
 
 // Handle buy item
 exports.buy = function (req, res) {
-    for (let i = 0; i < items.length; i++) {
-        if (items[i].title === req.params.title) {
-            if (items[i].inventory_count > 0) {
-                items[i].inventory_count--;
-                res.json({ message: items[i].title.concat(" bought") });
-            }
+    Item.updateOne(
+        { title: req.params.title, inventory_count: { $gt: 0 }},
+        { $inc: { inventory_count: -1 } },
+        function(err, found) {
+            if (err)
+                res.send(err);
+            if (found.nModified)
+                res.json({ message: req.params.title.concat(" bought")});
             else
-                res.json({ message: items[i].title.concat(" is out of stock") });
-        }
-    }
-    res.json({ message: "Item does not exist" });
+                res.json({ message: "Item is out of stock or does not exist"})
+    });
 };

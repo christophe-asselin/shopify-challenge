@@ -5,9 +5,18 @@
  */
 
 let express = require("express");
+var mongoose = require('mongoose');
 let app = express();
 
 let routes = require('./routes');
+
+const connectionStr = 'mongodb+srv://shopify:shopify@cluster0-4k2cm.mongodb.net/test?retryWrites=true';
+mongoose.connect(connectionStr, { useNewUrlParser: true }, function(err) {
+    if(!err){
+        console.log("no error!")
+    }
+});
+var db = mongoose.connection;
 
 app.use('/', routes);
 
