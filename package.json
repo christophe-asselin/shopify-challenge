@@ -24,6 +24,6 @@
   "homepage": "https://github.com/christophe-asselin/shopify-challenge#readme",
   "dependencies": {
     "express": "^4.16.4",
-    "mongoose": "^5.4.5"
+    "mongoose": "^5.7.5"
   }
 }
